@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/07/28 17:33:00 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/07/29 17:48:12 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,6 @@ OBJS_DIR			:= ./objs
 #TODO: HARDCODE THE SRCS
 BONUS_ONLY_SRCS		:= $(wildcard *_bonus.c)
 MANDATORY_SRCS		:= $(filter-out $(BONUS_ONLY_SRCS),$(wildcard *.c))
-
-#TODO: CONFIRM HEADERS (FOR NORMINETTE TESTING)
-BONUS_ONLY_HEADER	:= ft_printf_bonus.h
-MANDATORY_HEADER	:= ft_printf.h
 
 MANDATORY_OBJS		:= $(MANDATORY_SRCS:%.c=$(OBJS_DIR)/%.o)
 BONUS_ONLY_OBJS		:= $(BONUS_SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -38,22 +34,24 @@ all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(MANDATORY_OBJS)
 	@#TODO: SILENCE WITH '@#' ALL LINES EXCEPT ar
+	@echo
 	@echo "MANDATORY_SRCS:"
 	@echo $(MANDATORY_SRCS)
 	@echo
-	norminette $(MANDATORY_SRCS) $(MANDATORY_HEADER)
+	norminette
 	@echo
 	ar $(ARFLAGS) $(NAME) $(MANDATORY_OBJS)
 
 bonus: $(OBJS_DIR) $(BONUS_OBJS)
 	@#TODO: SILENCE WITH '@#' ALL LINES EXCEPT ar
+	@echo
 	@echo "MANDATORY_SRCS:"
 	@echo $(MANDATORY_SRCS)
 	@echo
 	@echo "BONUS_ONLY_SRCS:"
 	@echo $(BONUS_ONLY_SRCS)
 	@echo
-	norminette $(BONUS_SRCS) $(BONUS_HEADER)
+	norminette
 	@echo
 	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
 
