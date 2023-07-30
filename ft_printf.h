@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:51 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/29 17:42:57 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:10:26 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		precision;				//integer after '.'
  * left_adjusted ('-') overrides zero_padding ('0')
  * plus_before_positive ('+') overrides space_before_positive (' ')
  * */
-typedef struct s_printf_conv_mod
+typedef struct s_conv_mod
 {
 	bool			alt_form;
 	bool			left_adjusted;
@@ -43,19 +43,50 @@ typedef struct s_printf_conv_mod
 	unsigned int	min_field_width;
 	bool			precision_setted;
 	unsigned int	precision;
-}	t_printf_conv_mod;
+}	t_conv_mod;
+
+typedef void	(*t_conv_func)(va_list, t_conv_mod *, int *);
+
+/***/
 
 int				ft_printf(const char *fmt, ...);
 
 void			print_simple_char(const char **fmt_ptr,
-					int *n_char_printed_ptr);
+					int *n_printed_ptr);
 
 void			print_conversion_specification(const char **fmt_ptr,
-					int *n_char_printed_ptr, va_list ap);
+					int *n_printed_ptr, va_list ap);
 void			get_conv_mod_flags(const char **fmt_ptr,
-					t_printf_conv_mod *conv_mod);
+					t_conv_mod *conv_mod);
+void			get_printf_precision(const char **fmt_ptr,
+					t_conv_mod *conv_mod);
+t_conv_func		get_conversion_func(const char **fmt_ptr);
+
+/***/
+
+void			print_char_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_str_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_ptr_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_int_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_uint_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_hex_l_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_hex_u_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			print_percent_sign_conversion(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+void			printing_conversion_error(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
+
+/***/
+
 /*my strict rules: without initial spaces or signs (always positive, unsigned)*/
 /*doesn't handle overflows*/
 /*the str_ptr will end on the following caracter of the last digit*/
-unsigned int	atoi_strict_moving_str_ptr(const char **str_ptr);
+unsigned int	strict_atoi_and_move_str_ptr(const char **str_ptr);
 #endif

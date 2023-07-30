@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/07/29 17:48:12 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/07/29 18:34:57 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME): $(OBJS_DIR) $(MANDATORY_OBJS)
 	@echo "MANDATORY_SRCS:"
 	@echo $(MANDATORY_SRCS)
 	@echo
-	norminette
+	-norminette
 	@echo
 	ar $(ARFLAGS) $(NAME) $(MANDATORY_OBJS)
 
@@ -51,12 +51,13 @@ bonus: $(OBJS_DIR) $(BONUS_OBJS)
 	@echo "BONUS_ONLY_SRCS:"
 	@echo $(BONUS_ONLY_SRCS)
 	@echo
-	norminette
+	-norminette
 	@echo
 	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
 
 $(OBJS_DIR)/%.o: %.c
-	cc $(CFLAGS) -c $< -o $@
+	@#TODO: Remove the minus of cc
+	-cc $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
