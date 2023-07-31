@@ -6,9 +6,12 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/07/29 18:34:57 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/07/30 21:37:14 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#TODO: SUB-MAKE LIBFT
+#TODO: REMOVE .gitignore (ignoring libft folder)
 
 NAME				:= libftprintf.a
 

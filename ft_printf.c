@@ -6,12 +6,14 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:37:19 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/30 21:11:55 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:09:39 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+//TODO: Separar bonus de mantatory?
+//TODO: Sacar futuro a libft a otra nueva carpeta pseudo libft2 make
 //TODO: Y caracteres no printables??
 //TODO: Hace falta pasar by reference un char*? Si se asigna un valor se guarda
 //	localmente en la subfuncion o se guarda en la funcion principal?
@@ -57,7 +59,7 @@ void	print_conversion_specification(const char **fmt_ptr,
 	conv_mod = (t_conv_mod *) ft_calloc(1, sizeof(t_conv_mod));
 	(*fmt_ptr)++;
 	get_conv_mod_flags(fmt_ptr, conv_mod);
-	conv_mod->min_field_width = atoi_strict_and_move_str_ptr(fmt_ptr);
+	conv_mod->min_field_width = strict_atoi_and_move_str_ptr(fmt_ptr);
 	get_printf_precision(fmt_ptr, conv_mod);
 	conv_func = get_conversion_func(fmt_ptr);
 	conv_func(ap, conv_mod, n_printed_ptr);

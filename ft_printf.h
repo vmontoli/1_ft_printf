@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:51 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/30 21:10:26 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:51:47 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>		//va_list, va_start(), va_arg(), va_copy(), va_end()
 # include <stdlib.h>		//malloc(), free()
 # include <unistd.h>		//write()
+# include "libft/libft.h"	//ft_calloc()
 
 //CONVersion MODifiers
 /*
@@ -61,26 +62,41 @@ void			get_conv_mod_flags(const char **fmt_ptr,
 void			get_printf_precision(const char **fmt_ptr,
 					t_conv_mod *conv_mod);
 t_conv_func		get_conversion_func(const char **fmt_ptr);
+void			printing_conversion_error(va_list ap, t_conv_mod *conv_mod,
+					int *n_printed_ptr);
 
 /***/
 
+// %c
 void			print_char_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %s
 void			print_str_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %p
 void			print_ptr_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %d or %i
 void			print_int_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %u
 void			print_uint_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %x
 void			print_hex_l_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %X
 void			print_hex_u_conversion(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
+
+// %%
 void			print_percent_sign_conversion(va_list ap, t_conv_mod *conv_mod,
-					int *n_printed_ptr);
-void			printing_conversion_error(va_list ap, t_conv_mod *conv_mod,
 					int *n_printed_ptr);
 
 /***/
