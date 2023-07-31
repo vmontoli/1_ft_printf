@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:21:57 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/31 10:26:35 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:52:32 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	**ft_split(char const *s, char c);
 /*ft_itoa.c*/
 char	*ft_itoa(int n);
 			/*with malloc() [#include <stdlib.h> on its file]*/
-char	*ft_uitoa(unsigned int n);
+char	*ft_unsigned_itoa(unsigned int n);
 			/*with malloc() [#include <stdlib.h> on its file]*/
 			//useful for ft_printf project
 

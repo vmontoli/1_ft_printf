@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 11:49:16 by vmontoli          #+#    #+#              #
-#    Updated: 2023/05/21 01:40:35 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/07/31 12:55:07 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,17 +34,17 @@ BONUS_SRCS			:= $(MANDATORY_SRCS) \
 BONUS_OBJS			:= $(BONUS_SRCS:%.c=$(OBJS_DIR)/%.o)
 
 CFLAGS 				:= -Wall -Werror -Wextra
-ARFLAGS 			:= -crs
+ARFLAGS 			:= -rucs
 
 .DELETE_ON_ERROR:
 .PHONY: all bonus clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS_DIR) $(MANDATORY_OBJS)
+$(NAME): $(OBJS_DIR) $(BONUS_OBJS)
 	@#echo $(MANDATORY_SRCS)
 	@#norminette $(MANDATORY_SRCS) $(HEADER)
-	ar $(ARFLAGS) $(NAME) $(MANDATORY_OBJS)
+	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
 
 bonus: $(OBJS_DIR) $(BONUS_OBJS)
 	@#echo $(MANDATORY_SRCS)
