@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:51 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/30 21:51:47 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/12 23:37:20 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,6 @@ void			print_percent_sign_conversion(va_list ap, t_conv_mod *conv_mod,
 /*doesn't handle overflows*/
 /*the str_ptr will end on the following caracter of the last digit*/
 unsigned int	strict_atoi_and_move_str_ptr(const char **str_ptr);
+
+char			*ft_hex_itoa(size_t n, bool is_uppercase);
 #endif

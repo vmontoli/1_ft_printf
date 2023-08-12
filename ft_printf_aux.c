@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:17:45 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/31 16:07:04 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/12 21:57:28 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ void	get_conv_mod_flags(const char **fmt_ptr, t_conv_mod *conv_mod)
 			&& !(conv_mod->plus_before_positive);
 		(*fmt_ptr)++;
 	}
-}
-
-unsigned int	strict_atoi_and_move_str_ptr(const char **str_ptr)
-{
-	unsigned int	res;
-
-	res = 0;
-	while (**str_ptr >= '0' && **str_ptr <= '9')
-	{
-		res = (res * 10) + (**str_ptr - '0');
-		(*str_ptr)++;
-	}
-	return (res);
 }
 
 void	get_printf_precision(const char **fmt_ptr, t_conv_mod *conv_mod)
