@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 21:28:39 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/31 15:41:23 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/12 21:39:18 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ void	print_str_conversion(va_list ap, t_conv_mod *conv_mod,
 
 	(void) conv_mod;
 	arg = va_arg(ap, char *);
-	while (*arg != '\0')
+	if (arg == NULL)
 	{
-		write(1, arg, 1);
-		(*n_printed_ptr)++;
-		arg++;
+		write(1, "(null)", 6);
+		*n_printed_ptr += 6;
+	}
+	else
+	{
+		while (*arg != '\0')
+		{
+			write(1, arg, 1);
+			(*n_printed_ptr)++;
+			arg++;
+		}
 	}
 }
 
