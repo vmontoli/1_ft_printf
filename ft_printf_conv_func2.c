@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 21:47:37 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/07/31 15:51:24 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/12 21:24:34 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_int_conversion(va_list ap, t_conv_mod *conv_mod,
 	str = ft_itoa(arg);
 	len = ft_strlen(str);
 	write(1, str, len);
+	free(str);
 	*n_printed_ptr += len;
 }
 
@@ -41,5 +42,6 @@ void	print_uint_conversion(va_list ap, t_conv_mod *conv_mod,
 	str = ft_unsigned_itoa(arg);
 	len = ft_strlen(str);
 	write(1, str, len);
+	free(str);
 	*n_printed_ptr += len;
 }
