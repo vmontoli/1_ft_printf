@@ -6,12 +6,9 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/07/31 13:17:12 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/08/13 23:41:49 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#TODO: SUB-MAKE LIBFT
-#TODO: REMOVE .gitignore (ignoring libft folder)
 
 NAME				:= libftprintf.a
 
@@ -19,7 +16,6 @@ OBJS_DIR			:= ./objs
 
 LIBFT_DIR			:= ./libft
 LIBFT_LIB			:= $(LIBFT_DIR)/libft.a
-#LIBFT_HEADER		:= $(LIBFT_DIR)/libft.h
 
 
 #TODO: HARDCODE THE SRCS
@@ -50,18 +46,18 @@ $(NAME): $(OBJS_DIR) $(MANDATORY_OBJS) $(LIBFT_LIB)
 	@echo
 	ar $(ARFLAGS) $(NAME) $(MANDATORY_OBJS)
 
-bonus: $(OBJS_DIR) $(BONUS_OBJS) $(LIBFT_LIB)
-	@#TODO: SILENCE WITH '@#' ALL LINES EXCEPT ar
-	@echo
-	@echo "MANDATORY_SRCS:"
-	@echo $(MANDATORY_SRCS)
-	@echo
-	@echo "BONUS_ONLY_SRCS:"
-	@echo $(BONUS_ONLY_SRCS)
-	@echo
-	-norminette
-	@echo
-	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
+#bonus: $(OBJS_DIR) $(BONUS_OBJS) $(LIBFT_LIB)
+#	@#TODO: SILENCE WITH '@#' ALL LINES EXCEPT ar
+#	@echo
+#	@echo "MANDATORY_SRCS:"
+#	@echo $(MANDATORY_SRCS)
+#	@echo
+#	@echo "BONUS_ONLY_SRCS:"
+#	@echo $(BONUS_ONLY_SRCS)
+#	@echo
+#	norminette
+#	@echo
+#	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
 
 $(LIBFT_LIB):
 	@echo
@@ -73,7 +69,7 @@ $(LIBFT_LIB):
 
 $(OBJS_DIR)/%.o: %.c
 	@#TODO: Remove the minus of cc
-	-cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)

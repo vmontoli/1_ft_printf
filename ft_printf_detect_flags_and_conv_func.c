@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_aux.c                                    :+:      :+:    :+:   */
+/*   ft_printf_detect_flags_and_conv_func.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:17:45 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/12 21:57:28 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/13 23:30:51 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	get_conv_mod_flags(const char **fmt_ptr, t_conv_mod *conv_mod)
 		conv_mod->space_before_positive
 			= (conv_mod->space_before_positive || (**fmt_ptr == ' '))
 			&& !(conv_mod->plus_before_positive);
-		(*fmt_ptr)++;
+		*fmt_ptr += 1;
 	}
 }
 
@@ -38,7 +38,7 @@ void	get_printf_precision(const char **fmt_ptr, t_conv_mod *conv_mod)
 	conv_mod->precision_setted = (**fmt_ptr == '.');
 	if (**fmt_ptr == '.')
 	{
-		(*fmt_ptr)++;
+		*fmt_ptr += 1;
 		conv_mod->precision = strict_atoi_and_move_str_ptr(fmt_ptr);
 	}
 }
@@ -46,22 +46,22 @@ void	get_printf_precision(const char **fmt_ptr, t_conv_mod *conv_mod)
 t_conv_func	get_conversion_func(const char **fmt_ptr)
 {
 	if (**fmt_ptr == 'c')
-		return (print_char_conversion);
+		return (&print_char_conversion);
 	else if (**fmt_ptr == 's')
-		return (print_str_conversion);
+		return (&print_str_conversion);
 	else if (**fmt_ptr == 'p')
-		return (print_ptr_conversion);
+		return (&print_ptr_conversion);
 	else if (**fmt_ptr == 'd' || **fmt_ptr == 'i')
-		return (print_int_conversion);
+		return (&print_int_conversion);
 	else if (**fmt_ptr == 'u')
-		return (print_uint_conversion);
+		return (&print_uint_conversion);
 	else if (**fmt_ptr == 'x')
-		return (print_hex_l_conversion);
+		return (&print_hex_l_conversion);
 	else if (**fmt_ptr == 'X')
-		return (print_hex_u_conversion);
+		return (&print_hex_u_conversion);
 	else if (**fmt_ptr == '%')
-		return (print_percent_sign_conversion);
-	return (printing_conversion_error);
+		return (&print_percent_sign_conversion);
+	return (&printing_conversion_error);
 }
 
 void	printing_conversion_error(va_list ap, t_conv_mod *conv_mod,
@@ -69,5 +69,5 @@ void	printing_conversion_error(va_list ap, t_conv_mod *conv_mod,
 {
 	(void) ap;
 	(void) conv_mod;
-	*n_printed_ptr *= -1;
+	*n_printed_ptr = -1;
 }

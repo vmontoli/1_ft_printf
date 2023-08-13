@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_conv_func3.c                             :+:      :+:    :+:   */
+/*   ft_printf_conv_func_hex_ptr.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:48:14 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/12 23:45:52 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/13 23:47:52 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,29 @@ void	print_ptr_conversion(va_list ap, t_conv_mod *conv_mod,
 	void	*arg;
 	char	*str;
 	size_t	len;
+	size_t	bytes_written;
 
 	(void) conv_mod;
 	arg = (void *) va_arg(ap, void *);
-	write(1, "0x", 2);
+	bytes_written = write(1, "0x", 2);
+	if (bytes_written != 2)
+	{
+		*n_printed_ptr = -1;
+		return ;
+	}
 	str = ft_hex_itoa((size_t)arg, false);
+	if (str == NULL)
+	{
+		*n_printed_ptr = -1;
+		return ;
+	}
 	len = ft_strlen(str);
-	write(1, str, len);
+	bytes_written = write(1, str, len);
+	if (bytes_written == len)
+		*n_printed_ptr += 2 + len;
+	else
+		*n_printed_ptr = -1;
 	free(str);
-	*n_printed_ptr += 2 + len;
 }
 
 // %x
@@ -37,14 +51,23 @@ void	print_hex_l_conversion(va_list ap, t_conv_mod *conv_mod,
 	unsigned int	arg;
 	char			*str;
 	size_t			len;
+	size_t			bytes_written;
 
 	(void) conv_mod;
 	arg = (unsigned int) va_arg(ap, int);
 	str = ft_hex_itoa((size_t)arg, false);
+	if (str == NULL)
+	{
+		*n_printed_ptr = -1;
+		return ;
+	}
 	len = ft_strlen(str);
-	write(1, str, len);
+	bytes_written = write(1, str, len);
+	if (bytes_written == len)
+		*n_printed_ptr += len;
+	else
+		*n_printed_ptr = -1;
 	free(str);
-	*n_printed_ptr += len;
 }
 
 // %X
@@ -54,12 +77,21 @@ void	print_hex_u_conversion(va_list ap, t_conv_mod *conv_mod,
 	unsigned int	arg;
 	char			*str;
 	size_t			len;
+	size_t			bytes_written;
 
 	(void) conv_mod;
 	arg = (unsigned int) va_arg(ap, int);
 	str = ft_hex_itoa((size_t)arg, true);
+	if (str == NULL)
+	{
+		*n_printed_ptr = -1;
+		return ;
+	}
 	len = ft_strlen(str);
-	write(1, str, len);
+	bytes_written = write(1, str, len);
+	if (bytes_written == len)
+		*n_printed_ptr += len;
+	else
+		*n_printed_ptr = -1;
 	free(str);
-	*n_printed_ptr += len;
 }

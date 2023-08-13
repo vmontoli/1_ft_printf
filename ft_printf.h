@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:51 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/12 23:37:20 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:45:32 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef struct s_conv_mod
 	unsigned int	precision;
 }	t_conv_mod;
 
+//All the conv_func print_..._conversion() & printing_conversion_error()
+// functions signatures.
+//Used to pass the functions reference from get_conversion_func() called by
+// get_conversion_specification().
 typedef void	(*t_conv_func)(va_list, t_conv_mod *, int *);
 
 /***/
@@ -56,7 +60,7 @@ void			print_simple_char(const char **fmt_ptr,
 					int *n_printed_ptr);
 
 void			print_conversion_specification(const char **fmt_ptr,
-					int *n_printed_ptr, va_list ap);
+					int *n_printed_ptr, t_conv_mod *conv_mod, va_list ap);
 void			get_conv_mod_flags(const char **fmt_ptr,
 					t_conv_mod *conv_mod);
 void			get_printf_precision(const char **fmt_ptr,
@@ -101,9 +105,10 @@ void			print_percent_sign_conversion(va_list ap, t_conv_mod *conv_mod,
 
 /***/
 
-/*my strict rules: without initial spaces or signs (always positive, unsigned)*/
-/*doesn't handle overflows*/
-/*the str_ptr will end on the following caracter of the last digit*/
+/*my strict rules:
+ * without initial spaces or signs (always positive, unsigned)*/
+/* doesn't handle overflows*/
+/* the str_ptr will end pointing the following caracter of the last digit*/
 unsigned int	strict_atoi_and_move_str_ptr(const char **str_ptr);
 
 char			*ft_hex_itoa(size_t n, bool is_uppercase);
