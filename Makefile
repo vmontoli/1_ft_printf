@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/08/14 03:43:04 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/08/14 08:10:08 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME): $(OBJS_DIR) $(MANDATORY_OBJS) $(LIBFT_LIB)
 	@echo "MANDATORY_SRCS:"
 	@echo $(MANDATORY_SRCS)
 	@echo
-	@#-norminette
+	-norminette
 	@echo
 	ar $(ARFLAGS) $(NAME) $(MANDATORY_OBJS)
 

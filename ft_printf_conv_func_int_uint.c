@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 21:47:37 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/14 03:54:05 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/14 08:15:11 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,17 @@ void	print_int_conversion(va_list ap, t_conv_mod *conv_mod,
 			bytes_written = write(1, "+", 1);
 		else
 			bytes_written = write(1, " ", 1);
-		if (bytes_written == 1)
-			*n_printed_ptr += 1;
-		else
-		{
-			*n_printed_ptr = -1;
+		if (did_write_fail(bytes_written, n_printed_ptr))
 			return ;
-		}
+		*n_printed_ptr += 1;
 	}
 	str = ft_itoa(arg);
-	if (str == NULL)
-	{
-		*n_printed_ptr = -1;
+	if (did_malloc_fail(str, n_printed_ptr))
 		return ;
-	}
 	len = ft_strlen(str);
 	bytes_written = write(1, str, len);
-	if (bytes_written == len)
+	if (!did_write_fail(bytes_written, n_printed_ptr))
 		*n_printed_ptr += len;
-	else
-		*n_printed_ptr = -1;
 	free(str);
 }
 
@@ -64,16 +55,11 @@ void	print_uint_conversion(va_list ap, t_conv_mod *conv_mod,
 	(void) conv_mod;
 	arg = va_arg(ap, unsigned int);
 	str = ft_unsigned_itoa(arg);
-	if (str == NULL)
-	{
-		*n_printed_ptr = -1;
+	if (did_malloc_fail(str, n_printed_ptr))
 		return ;
-	}
 	len = ft_strlen(str);
 	bytes_written = write(1, str, len);
-	if (bytes_written == len)
+	if (!did_write_fail(bytes_written, n_printed_ptr))
 		*n_printed_ptr += len;
-	else
-		*n_printed_ptr = -1;
 	free(str);
 }
