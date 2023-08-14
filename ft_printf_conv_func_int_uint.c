@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 21:47:37 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/13 23:27:44 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/14 03:54:05 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,22 @@ void	print_int_conversion(va_list ap, t_conv_mod *conv_mod,
 	size_t	len;
 	size_t	bytes_written;
 
-	(void) conv_mod;
 	arg = va_arg(ap, int);
+	if (arg >= 0
+		&& (conv_mod->plus_before_positive || conv_mod->space_before_positive))
+	{
+		if (conv_mod->plus_before_positive)
+			bytes_written = write(1, "+", 1);
+		else
+			bytes_written = write(1, " ", 1);
+		if (bytes_written == 1)
+			*n_printed_ptr += 1;
+		else
+		{
+			*n_printed_ptr = -1;
+			return ;
+		}
+	}
 	str = ft_itoa(arg);
 	if (str == NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:51 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/13 22:45:32 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/14 03:44:13 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include "libft/libft.h"	//ft_calloc()
 
 //CONVersion MODifiers
-/*
-bool	alt_form;				//'#'
+/* csdupX%
+bool	alt_form;				//'#': xX (0x or 0X before non-0 values)
 bool	left_adjusted;			//'-'
 bool	zero_padding;			//'0'
-bool	plus_before_positive;	//'+'
-bool	space_before_positive;	//' '
+bool	plus_before_positive;	//'+': d (also w/ 0)
+bool	space_before_positive;	//' ': d (also w/ 0)
 int		min_field_width;		//integer NOT STARTING WITH 0 (means '0' flag)
 bool	precision_setted;		//'.'
 int		precision;				//integer after '.'

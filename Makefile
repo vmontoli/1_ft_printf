@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/08/13 23:41:49 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/08/14 03:43:04 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ CFLAGS 				:= -Wall -Werror -Wextra
 ARFLAGS 			:= -rucs
 
 .DELETE_ON_ERROR:
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re $(LIBFT_LIB)
 
 all: $(NAME)
 
@@ -42,22 +42,22 @@ $(NAME): $(OBJS_DIR) $(MANDATORY_OBJS) $(LIBFT_LIB)
 	@echo "MANDATORY_SRCS:"
 	@echo $(MANDATORY_SRCS)
 	@echo
-	-norminette
+	@#-norminette
 	@echo
 	ar $(ARFLAGS) $(NAME) $(MANDATORY_OBJS)
 
-#bonus: $(OBJS_DIR) $(BONUS_OBJS) $(LIBFT_LIB)
-#	@#TODO: SILENCE WITH '@#' ALL LINES EXCEPT ar
-#	@echo
-#	@echo "MANDATORY_SRCS:"
-#	@echo $(MANDATORY_SRCS)
-#	@echo
-#	@echo "BONUS_ONLY_SRCS:"
-#	@echo $(BONUS_ONLY_SRCS)
-#	@echo
-#	norminette
-#	@echo
-#	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
+bonus: $(OBJS_DIR) $(BONUS_OBJS) $(LIBFT_LIB)
+	@#TODO: SILENCE WITH '@#' ALL LINES EXCEPT ar
+	@echo
+	@echo "MANDATORY_SRCS:"
+	@echo $(MANDATORY_SRCS)
+	@echo
+	@echo "BONUS_ONLY_SRCS:"
+	@echo $(BONUS_ONLY_SRCS)
+	@echo
+	#@-norminette
+	@echo
+	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
 
 $(LIBFT_LIB):
 	@echo
