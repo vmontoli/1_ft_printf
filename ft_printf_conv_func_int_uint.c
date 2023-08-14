@@ -6,15 +6,14 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 21:47:37 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/14 08:15:11 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:09:01 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 // %d or %i
-void	print_int_conversion(va_list ap, t_conv_mod *conv_mod,
-			int *n_printed_ptr)
+void	print_int_conversion(va_list ap, t_conv_mod *conv_mod, int *count_ptr)
 {
 	int		arg;
 	char	*str;
@@ -29,23 +28,22 @@ void	print_int_conversion(va_list ap, t_conv_mod *conv_mod,
 			bytes_written = write(1, "+", 1);
 		else
 			bytes_written = write(1, " ", 1);
-		if (did_write_fail(bytes_written, n_printed_ptr))
+		if (printf_did_write_fail(bytes_written, count_ptr))
 			return ;
-		*n_printed_ptr += 1;
+		*count_ptr += 1;
 	}
 	str = ft_itoa(arg);
-	if (did_malloc_fail(str, n_printed_ptr))
+	if (printf_did_malloc_fail(str, count_ptr))
 		return ;
 	len = ft_strlen(str);
 	bytes_written = write(1, str, len);
-	if (!did_write_fail(bytes_written, n_printed_ptr))
-		*n_printed_ptr += len;
+	if (!printf_did_write_fail(bytes_written, count_ptr))
+		*count_ptr += len;
 	free(str);
 }
 
 // %u
-void	print_uint_conversion(va_list ap, t_conv_mod *conv_mod,
-			int *n_printed_ptr)
+void	print_uint_conversion(va_list ap, t_conv_mod *conv_mod, int *count_ptr)
 {
 	unsigned int	arg;
 	char			*str;
@@ -55,11 +53,11 @@ void	print_uint_conversion(va_list ap, t_conv_mod *conv_mod,
 	(void) conv_mod;
 	arg = va_arg(ap, unsigned int);
 	str = ft_unsigned_itoa(arg);
-	if (did_malloc_fail(str, n_printed_ptr))
+	if (printf_did_malloc_fail(str, count_ptr))
 		return ;
 	len = ft_strlen(str);
 	bytes_written = write(1, str, len);
-	if (!did_write_fail(bytes_written, n_printed_ptr))
-		*n_printed_ptr += len;
+	if (!printf_did_write_fail(bytes_written, count_ptr))
+		*count_ptr += len;
 	free(str);
 }

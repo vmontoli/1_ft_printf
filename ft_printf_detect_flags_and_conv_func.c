@@ -6,7 +6,7 @@
 /*   By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:17:45 by vmontoli          #+#    #+#             */
-/*   Updated: 2023/08/13 23:30:51 by vmontoli         ###   ########.fr       */
+/*   Updated: 2023/08/14 09:59:16 by vmontoli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	get_conv_mod_flags(const char **fmt_ptr, t_conv_mod *conv_mod)
 			&& !(conv_mod->plus_before_positive);
 		*fmt_ptr += 1;
 	}
+}
+
+void	get_printf_min_field_width(const char **fmt_ptr, t_conv_mod *conv_mod)
+{
+	conv_mod->min_field_width = strict_atoi_and_move_str_ptr(fmt_ptr);
 }
 
 void	get_printf_precision(const char **fmt_ptr, t_conv_mod *conv_mod)
@@ -65,9 +70,9 @@ t_conv_func	get_conversion_func(const char **fmt_ptr)
 }
 
 void	printing_conversion_error(va_list ap, t_conv_mod *conv_mod,
-			int *n_printed_ptr)
+			int *count_ptr)
 {
 	(void) ap;
 	(void) conv_mod;
-	*n_printed_ptr = -1;
+	*count_ptr = -1;
 }
