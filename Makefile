@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/28 17:12:41 by vmontoli          #+#    #+#              #
-#    Updated: 2023/08/16 07:32:55 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/08/16 07:54:27 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,12 +85,12 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 clean:
-	cd $(LIBFT_DIR) && $(MAKE) clean
-	-rm -r $(OBJS_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
+	rm -r $(OBJS_DIR) | true
 
 fclean:
-	cd $(LIBFT_DIR) && $(MAKE) fclean
-	-rm -r $(OBJS_DIR)
-	-rm $(NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	rm -r $(OBJS_DIR) | true
+	rm $(NAME) | true
 
 re: fclean all

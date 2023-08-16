@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 11:49:16 by vmontoli          #+#    #+#              #
-#    Updated: 2023/08/16 07:31:33 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/08/16 07:52:47 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,10 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 clean:
-	-rm -r $(OBJS_DIR)
+	rm -r $(OBJS_DIR) | true
 
 fclean:
-	-rm -r $(OBJS_DIR)
-	-rm $(NAME)
+	rm -r $(OBJS_DIR) | true
+	rm $(NAME) | true
 
 re: fclean all
