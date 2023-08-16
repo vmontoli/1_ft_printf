@@ -6,7 +6,7 @@
 #    By: vmontoli <vmontoli@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 11:49:16 by vmontoli          #+#    #+#              #
-#    Updated: 2023/07/31 12:55:07 by vmontoli         ###   ########.fr        #
+#    Updated: 2023/08/16 07:31:33 by vmontoli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,23 +15,21 @@ NAME				:= libft.a
 OBJS_DIR			:= ./objs
 HEADER				:= libft.h
 
-#MANDATORY_SRCS		:= $(flter-out $(wildcard *_bonus.c),$(wildcard *.c))
-MANDATORY_SRCS		:= ft_atoi.c ft_calloc.c ft_char_is_in_str.c \
+ALL_SRCS			:= ft_atoi.c ft_calloc.c ft_char_is_in_str.c \
 					ft_isascii_more.c ft_isupper_islower.c ft_itoa.c \
 					ft_memcpy_memmove.c ft_memset_bzero.c ft_putnbr.c \
 					ft_putstr_more.c ft_size_t_max_min.c ft_split.c \
 					ft_strchr_memchr.c ft_strdup.c ft_striteri_strmapi.c \
 					ft_strjoin.c ft_strlcpy_strlcat.c ft_strlen.c \
 					ft_strncmp_memcmp.c ft_strnstr.c ft_strtrim.c \
-					ft_substr.c ft_toupper_tolower.c
-MANDATORY_OBJS		:= $(MANDATORY_SRCS:%.c=$(OBJS_DIR)/%.o)
-
-#BONUS_SRCS			:= $(wildcard *.c)
-BONUS_SRCS			:= $(MANDATORY_SRCS) \
+					ft_substr.c ft_toupper_tolower.c \
 					ft_lstadd_front_bonus.c ft_lstdelone_clear_iter_bonus.c \
 					ft_lstmap_bonus.c ft_lstnew_bonus.c \
 					ft_lstsize_last_back_bonus.c
-BONUS_OBJS			:= $(BONUS_SRCS:%.c=$(OBJS_DIR)/%.o)
+
+ALL_OBJS			:= $(ALL_SRCS:%.c=$(OBJS_DIR)/%.o)
+
+COMMON_DEPS			:= $(HEADER) Makefile
 
 CFLAGS 				:= -Wall -Werror -Wextra
 ARFLAGS 			:= -rucs
@@ -39,20 +37,14 @@ ARFLAGS 			:= -rucs
 .DELETE_ON_ERROR:
 .PHONY: all bonus clean fclean re
 
-all: $(NAME)
+all bonus: $(NAME)
 
-$(NAME): $(OBJS_DIR) $(BONUS_OBJS)
+$(NAME): $(ALL_OBJS)
 	@#echo $(MANDATORY_SRCS)
 	@#norminette $(MANDATORY_SRCS) $(HEADER)
-	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
+	ar $(ARFLAGS) $(NAME) $(ALL_OBJS)
 
-bonus: $(OBJS_DIR) $(BONUS_OBJS)
-	@#echo $(MANDATORY_SRCS)
-	@#echo $(filter $(wildcard *_bonus.c),$(BONUS_SRCS))
-	@#norminette $(BONUS_SRCS) $(HEADER)
-	ar $(ARFLAGS) $(NAME) $(BONUS_OBJS)
-
-$(OBJS_DIR)/%.o: %.c
+$(OBJS_DIR)/%.o: %.c $(COMMON_DEPS) | $(OBJS_DIR)
 	cc $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
@@ -61,7 +53,8 @@ $(OBJS_DIR):
 clean:
 	-rm -r $(OBJS_DIR)
 
-fclean: clean
+fclean:
+	-rm -r $(OBJS_DIR)
 	-rm $(NAME)
 
 re: fclean all
